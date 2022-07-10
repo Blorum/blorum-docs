@@ -1,19 +1,32 @@
 # Documents - APIs
+
 Those APIs are meant to be designed in RESTful.
 
-### /user/login
-##### POST
-_Take params_
+### Universal failbacks
+If server-side unknown error happened: 500
 
-- username - String
+If rate limit reached: 429
 
-- password - String
+If you ask Blorum to brew coffee: 418
 
-_Return_
 
-header:
+# User APIs
+## /user/login
+#### POST
+##### _Take params_
 
-Set-Cookie: "xxx...(same as token)"
+> username - String
+
+> password - String
+
+##### _Return_
+ 
+___If success___:
+
+status: 200
+
+>header:
+>Set-Cookie: "uid=xxx; token=xxx...(same as token)"
 
 body:
 
@@ -22,7 +35,32 @@ body:
 >	"expire_after": "[UTC Timestamp]"
 >}
 
-### /user/logout
+___if failed___:
+
+status: 401
+
+## /user/register
+#### POST
+##### ___Take params___
+
+> username - String
+
+> password - String
+
+##### ___Return___
+___if success___:
+
+>header:
+>Set-Cookie: "uid=xxx; token=xxx...(same as token)"
+
+body:
+
+>{
+>	"token": "xxx....",
+>	"expire_after": "[UTC Timestamp]"
+>}
+
+## /user/logout
 ##### POST
 _Take params_
 
@@ -34,6 +72,7 @@ If success: 200
 
 If error happened: 500
 
-### /user/update
 
-### /user/suicide
+## /user/update
+
+## /user/suicide

@@ -1,11 +1,19 @@
 # Document - config
 
+Those configs will be loaded into Redis database in Blorum's initialization process.
+
 ## True / False flags
 ##### Example
-> {"value" : true}
-> {"value" : false}
+> true
+> false
 
 #### allowed_register
+##### default
+true
+#### allowed_login
+##### default
+true
+
 
 ## Varible flags
 ##### Example
@@ -16,10 +24,8 @@
 > }}
 
 #### site_url
-
 ##### default
 127.0.0.1
-
 
 #### site_title
 ##### default
@@ -31,6 +37,20 @@ This is a Blorum site, where you could publish blogs and chat.
 
 #### site_logo
 ##### default
+/favicon.ico
+
+#### ip_detect_method
+This is neccessary to edit if you are running Blorum behind a nginx reverse proxy!
+If so, you need to transfer the real client IP via header.
+##### default
+raw_ip
+##### selectable
+header
+
+#### ip_detect_header
+##### default
+X-Forwarded-From
+
 
 * Time were based on seconds.
 #### user_cookie_expire_after
@@ -59,7 +79,7 @@ This is a Blorum site, where you could publish blogs and chat.
 ##### default
 1
 
-#### max_mods_sessions
+#### max_mod_sessions
 ##### default
 2
 
@@ -76,7 +96,7 @@ This is a Blorum site, where you could publish blogs and chat.
 
 #### ip_rate_limit_react
 ##### default
-32
+64
 
 #### ip_rate_limit_comment
 ##### default
@@ -96,16 +116,33 @@ This is a Blorum site, where you could publish blogs and chat.
 
 #### ip_rate_limit_bypass_whitelist
 ##### default
-[]
+[127.0.0.1]
 
 #### user_rate_limit_posts
+##### default
+12
 
 #### user_rate_limit_react
+##### default
+64
 
 #### user_rate_limit_comment
+##### default
+60
 
 #### user_rate_limit_remove
+##### default
+{
+	"article": 12,
+	"posts": 12,
+	"react": 128,
+	"comment": 60
+}
 
 #### user_rate_limit_articles
+##### default
+12
 
 #### user_rate_limit_login
+##### default
+30
