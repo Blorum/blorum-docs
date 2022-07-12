@@ -8,7 +8,7 @@ Stored in
 
 #### List:
 ##### key:
-user_session@[uid]
+user_session:[uid]
 ##### value:
 {
 	"token": "xxxxxxxx",
@@ -20,9 +20,15 @@ user_session@[uid]
 }
 
 ### User permissions
-user permissions cache will be set to expire in the same time as the last key.
+user permissions cache will be set to expire as same as the last key's expire date, so technically it is impossible for a cache-miss to take place.
 
 ##### key:
-user_permissions@[uid]
+user_permissions:[uid]
 ##### value:
 ["p1", "p2"......]
+
+### User rate limits
+##### key:
+user_rate_limit_[item]:[uid]
+##### value:
+[number]

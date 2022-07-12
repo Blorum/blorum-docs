@@ -13,7 +13,9 @@ true
 #### allowed_login
 ##### default
 true
-
+#### enable_email_challenge
+##### default
+false
 
 ## Varible flags
 ##### Example
@@ -39,11 +41,15 @@ This is a Blorum site, where you could publish blogs and chat.
 ##### default
 /favicon.ico
 
+#### site_logo
+##### default
+/statics/avatar.png
+
 #### ip_detect_method
 This is neccessary to edit if you are running Blorum behind a nginx reverse proxy!
 If so, you need to transfer the real client IP via header.
 ##### default
-raw_ip
+connection
 ##### selectable
 header
 
@@ -146,3 +152,22 @@ X-Forwarded-From
 #### user_rate_limit_login
 ##### default
 30
+
+#### register_default_role
+##### default
+user
+#### user_default_flags
+##### default
+
+
+
+#### default_email_protocol
+##### default
+smtp
+##### selectable
+sendmail
+
+SES
+
+#### smtp_config
+
