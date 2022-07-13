@@ -15,10 +15,9 @@ Blorum assume that there is three circumstances that a cache, would be the best.
 
 - When a content is initially created, and does not show statistically important decline compared to average viewer stats.
 
-- When a content suddenly encountered higher-than-average accesses.
-
 - When a content maintained a statistically important higher-than-average viewer stats.
 
+- When a content suddenly encountered higher-than-average accesses.
 
 ## How Blorum does statistics
 
@@ -26,11 +25,20 @@ Overall statistics, like total views, replies... were easy to stat, but Blorum n
 
 This hacky move, in default, will cause a bug in Blorum: An attacker could create a large amount of visits on a content that, actually, has no viewers, and when they stop accessing, those memory will hardly ever be freed.
 
-Thus, Blorum will maintain a cached-content set, and **scheduled.mjs** will automatically check if there is access logs to be free every 3 days.
+Thus, Blorum will maintain a cached-content set, and **scheduled.mjs** will automatically check if there is cache to be free every 3 days.
 
 ## When does those strategy started working?
 Blorum caching strategy will not work until the corresponding content type has >10 numbers in total. Instead, if there is <10 contents for certain type, Blorum will always cache them.
 
 ## Default strategy for Circumstances #1
+When a new post is created, Blorum will cache it for 3 days, if its viewer count & participant count is lower than 7-day average, its cache got removed.
+
+When a new post is created, Blorum will cache it for 5 days, if its viewer count & participant count is lower than 7-day average, its cache got removed.
+
 ## Default strategy for Circumstances #2
+If a content maintained a viewer count that is higher than (Average + 0.3\*IQR), Blorum will maintain its cache.
+
+If a content maintained a viewer count that is higher than (Average + 0.4\*IQR), Blorum will  maintain its , and also its comments & notes' cache.
+
 ## Default strategy for Circumstances #3
+If a content's one hour viewer is 50%IQR higher than 7day hour average or 50%IQR higher than overall hour average, it got cached for 1 day.

@@ -35,13 +35,13 @@ Yet another Blorum site.
 
 #### site_excerpt
 ##### default
-This is a Blorum site, where you could publish blogs and chat.
+This is a Blorum site, where you could publish blogs and talk.
 
 #### site_logo
 ##### default
 /favicon.ico
 
-#### site_logo
+#### default_avatar
 ##### default
 /statics/avatar.png
 
@@ -124,41 +124,139 @@ X-Forwarded-From
 ##### default
 [127.0.0.1]
 
-#### user_rate_limit_posts
-##### default
-12
 
-#### user_rate_limit_react
+#### user_roles
 ##### default
-64
+["omni", "admin", "moderator", "forum_admin", "auditor", "writer", “user”]
 
-#### user_rate_limit_comment
-##### default
-60
-
-#### user_rate_limit_remove
+#### roles_permissions
 ##### default
 {
-	"article": 12,
-	"posts": 12,
-	"react": 128,
-	"comment": 60
+	"admin": {
+		"flags": {
+			[]
+		},
+		"rate_limits":{
+			"create":{
+				"article": Infinity,
+				"post": Infinity,
+				"react": Infinity,
+				"comment": Infinity
+			},
+			"remove": {
+				"article": Infinity,
+				"post": Infinity,
+				"react": Infinity,
+				"comment": Infinity
+			}
+			"login": Infinity
+		}
+	},
+	"moderator": {
+		"flags": {
+			[]
+		},
+		"rate_limits":{
+			"create":{
+				"article": 60,
+				"post": 60,
+				"react": 120,
+				"comment": 120
+			},
+			"remove": {
+				"article": 60,
+				"post": 60,
+				"react": 120,
+				"comment": 120
+			}
+			"login": 20
+		}
+	},
+	"forum_admin": {
+		"flags": {
+			[]
+		},
+		"rate_limits":{
+			"create":{
+				"article": 0,
+				"post": 60,
+				"react": 120,
+				"comment": 120
+			},
+			"remove": {
+				"article": 0,
+				"post": 100,
+				"react": 240,
+				"comment": 240
+			}
+			"login": 20
+		}
+	},
+	"auditor": {
+		"flags": {
+			[]
+		},
+		"rate_limits":{
+			"create":{
+				"article": 0,
+				"post": 10,
+				"react": 60,
+				"comment": 60
+			},
+			"remove": {
+				"article": 1,
+				"post": 15,
+				"react": 240,
+				"comment": 360
+			}
+			"login": 20
+		}
+	},
+	"writer": {
+		"flags": {
+			[]
+		},
+		"rate_limits":{
+			"create":{
+				"article": 5,
+				"post": 10,
+				"react": 30,
+				"comment": 30
+			},
+			"remove": {
+				"article": 5,
+				"post": 10,
+				"react": 30,
+				"comment": 30
+			}
+			"login": 20
+		}
+	},
+	"user": {
+		"flags": {
+			[]
+		},
+		"rate_limits":{
+			"create":{
+				"article": 0,
+				"post": 6,
+				"react": 30,
+				"comment": 24
+			},
+			"remove": {
+				"article": 0,
+				"post": 10,
+				"react": 30,
+				"comment": 24
+			}
+			"login": 20
+		}
+	}
 }
-
-#### user_rate_limit_articles
-##### default
-12
-
-#### user_rate_limit_login
-##### default
-30
 
 #### register_default_role
 ##### default
 user
-#### user_default_flags
-##### default
-
 
 
 #### default_email_protocol
@@ -170,4 +268,6 @@ sendmail
 SES
 
 #### smtp_config
+
+#### ses_config
 

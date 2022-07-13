@@ -2,7 +2,7 @@
 
 ## User Statistics Prototype
 {
-	"invited_by": [uid, if not invited - 0]
+	"invited_by": [uid, if not invited - 0],
 	"registered_at": [UTC Timestamp],
 	"create":{
 		"comment": [number],
@@ -26,3 +26,4 @@
 	"invite": [uid1, uid2.....]
 }
 
+## User Session Statistics Prototype

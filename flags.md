@@ -17,91 +17,105 @@ flags, or disable them with corresponding flags.
 articles, posts, notes, comments:
 
 - 0: Unallowed.
-- 1: Allowed to perform action to themselves' contents.(For notes, it is public visibility.)
+- 1: Allowed to perform action to themselves' contents.(For notes, it is the ability to create note with public visibility.)
 - 2: Allowed to perform action to themselves' contents, even if it is "protected".
 - 3: Allowed to perform action to everyones' contents, except those with an author that has the role of admin or moderator, and articles/posts with "protected".
 - 4: Allowed to perform action to everyones' contents, except those with an author that has the role of admin or moderator.
 - 5: Allowed to perform action to everyones' contents.
 
-#### articles.create
+#### article.create
 
-#### articles.anonymous
+#### article.anonymous
 
-#### articles.edit
+#### article.edit
 
-#### articles.remove
+#### article.remove
 
-#### articles.pin
+#### article.pin
 
-#### articles.protect
+#### article.protect
 
-#### articles.react
+#### article.react
 
-#### articles.react.remove
+#### article.react.remove
 
-#### articles.pin
+#### article.pin
 
-#### posts.create
+#### article.report
 
-#### posts.edit
 
-#### posts.remove
+#### post.create
 
-#### posts.pin.forum
+#### post.anonymous
 
-#### posts.pin.global
+#### post.edit
 
-#### articles.react
+#### post.remove
 
-#### articles.react.remove
+#### post.pin.forum
 
-#### notes.create
+#### post.pin.global
 
-#### notes.anonymous
+#### post.react
 
-#### notes.edit
+#### post.react.remove
 
-#### notes.remove
+#### post.report
 
-#### notes.report
 
-#### comments.anonymous
+#### note.create
 
-#### comments.create
+#### note.anonymous
 
-#### comments.edit
+#### note.edit
 
-#### comments.remove
+#### note.remove
 
-#### comments.vote.up
+#### note.report
 
-#### comments.vote.down
 
-#### comments.report
+#### comment.anonymous
+
+#### comment.pin.article
+
+#### comment.pin.post
+
+#### comment.pin.user
+
+#### comment.create
+
+#### comment.edit
+
+#### comment.remove
+
+#### comment.vote.up
+
+#### comment.vote.down
+
+#### comment.report
+
 
 #### user.create
 
-#### user.modify
+#### user.modify.regular
 
 #### user.modify.sensitive
 
 #### user.report
 
-#### user.ban.posts
+#### user.ban.post
 
-#### user.ban.articles
+#### user.ban.article
 
-#### user.ban.reacts
+#### user.ban.react
 
-#### user.ban.notes
+#### user.ban.note
 
 #### user.remove
 
-#### user.statistics.regular_read
+#### user.statistics.read.regular
 
-#### user.statistics.sensitive_read
+#### user.statistics.read.sensitive
 
 
 ### Varible Flags
-
-Varible Flags are often used to set rate limits.
