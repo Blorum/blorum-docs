@@ -13,7 +13,16 @@ true
 #### allowed_login
 ##### default
 true
-#### enable_email_challenge
+#### allowed_comment_to_article
+##### default
+true
+#### allowed_comment_to_post
+##### default
+true
+#### allowed_comment_to_user
+##### default
+true
+#### enable_email_register_challenge
 ##### default
 false
 
@@ -47,6 +56,7 @@ This is a Blorum site, where you could publish blogs and talk.
 
 #### ip_detect_method
 This is neccessary to edit if you are running Blorum behind a nginx reverse proxy!
+
 If so, you need to transfer the real client IP via header.
 ##### default
 connection
@@ -59,40 +69,10 @@ X-Forwarded-From
 
 
 * Time were based on seconds.
-#### user_cookie_expire_after
-##### default
-2630000 
-
-(One month)
-
-#### admin_cookie_expire_after
-##### default
-1315000
-
-(Half month)
-
-#### mod_cookie_expire_after
-##### default
-1315000
-
-(Half month)
-
-#### max_user_sessions
-##### default
-4
-
-#### max_admin_sessions
-##### default
-1
-
-#### max_mod_sessions
-##### default
-2
-
 
 *Rate limits are based on requests per hour.
 
-#### ip_rate_limit_posts
+#### ip_rate_limit_post
 ##### default
 12
 
@@ -110,9 +90,19 @@ X-Forwarded-From
 
 #### ip_rate_limit_remove
 ##### default
-128
+{
 
-#### ip_rate_limit_articles
+	"article": 12,
+	
+	"posts": 12,
+	
+	"react": 128,
+	
+	"comment": 60
+	
+}
+
+#### ip_rate_limit_article
 ##### default
 12
 
@@ -133,8 +123,8 @@ X-Forwarded-From
 ##### default
 {
 	"admin": {
-		"flags": {
-			[]
+		"permissions": {
+			"flags": []
 		},
 		"rate_limits":{
 			"create":{
@@ -148,13 +138,15 @@ X-Forwarded-From
 				"post": Infinity,
 				"react": Infinity,
 				"comment": Infinity
-			}
+			},
 			"login": Infinity
-		}
+		},
+		"cookie_expire_after": 13150000,
+		"max_session": 10
 	},
 	"moderator": {
-		"flags": {
-			[]
+		"permissions": {
+			"flags": []
 		},
 		"rate_limits":{
 			"create":{
@@ -168,13 +160,15 @@ X-Forwarded-From
 				"post": 60,
 				"react": 120,
 				"comment": 120
-			}
+			},
 			"login": 20
-		}
+		},
+		"cookie_expire_after":  13150000,
+		"max_session": 10
 	},
 	"forum_admin": {
-		"flags": {
-			[]
+		"permissions": {
+			"flags": []
 		},
 		"rate_limits":{
 			"create":{
@@ -188,13 +182,15 @@ X-Forwarded-From
 				"post": 100,
 				"react": 240,
 				"comment": 240
-			}
+			},
 			"login": 20
-		}
+		},
+		"cookie_expire_after": 13150000,
+		"max_session": 10
 	},
 	"auditor": {
-		"flags": {
-			[]
+		"permissions": {
+			"flags": []
 		},
 		"rate_limits":{
 			"create":{
@@ -208,13 +204,15 @@ X-Forwarded-From
 				"post": 15,
 				"react": 240,
 				"comment": 360
-			}
+			},
 			"login": 20
-		}
+		},
+		"cookie_expire_after": 13150000,
+		"max_session": 10
 	},
 	"writer": {
-		"flags": {
-			[]
+		"permissions": {
+			"flags": []
 		},
 		"rate_limits":{
 			"create":{
@@ -228,13 +226,15 @@ X-Forwarded-From
 				"post": 10,
 				"react": 30,
 				"comment": 30
-			}
+			},
 			"login": 20
-		}
+		},
+		"cookie_expire_after": 2630000,
+		"max_session": 10
 	},
 	"user": {
-		"flags": {
-			[]
+		"permissions": {
+			"flags": []
 		},
 		"rate_limits":{
 			"create":{
@@ -248,9 +248,11 @@ X-Forwarded-From
 				"post": 10,
 				"react": 30,
 				"comment": 24
-			}
+			},
 			"login": 20
-		}
+		},
+		"cookie_expire_after": 2630000,
+		"max_session": 8
 	}
 }
 
@@ -267,7 +269,13 @@ sendmail
 
 SES
 
+#### sendmail_config
+##### default
+{}
+
 #### smtp_config
-
+##### default
+{}
 #### ses_config
-
+##### default
+{}

@@ -10,7 +10,7 @@ flags, or disable them with corresponding flags.
 
 ## True / False Flags
 
-### bypass_all_rate_limits
+### override_ip_rate_limits
 
 ## Categorical Flags
 
@@ -116,6 +116,15 @@ articles, posts, notes, comments:
 #### user.statistics.read.regular
 
 #### user.statistics.read.sensitive
+
+
+#### site.config.modify.regular
+
+#### user.permission.modify
+
+#### site.config.modify.sensitive
+
+
 
 
 ### Varible Flags
