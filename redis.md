@@ -12,6 +12,8 @@ user_session:[uid]
 ##### value:
 {
 	"token": "xxxxxxxx",
+	"permissions": {
+	}
 	"statistics": {
 		"date": [UTC Timestamp],
 		"userAgent": "xxx",
@@ -19,16 +21,15 @@ user_session:[uid]
 	}
 }
 
-### User permissions
-user permissions cache will be set to expire as same as the last key's expire date, so technically it is impossible for a cache-miss to take place.
-
-##### key:
-user_permissions:[uid]
-##### value:
-["p1", "p2"......]
-
 ### User rate limits
 ##### key:
 user_rate_limit_[item]:[uid]
 ##### value:
 [number]
+
+### IP rate limits
+##### key:
+ip_rate_limit_[item]:x.y.z.w
+##### value:
+[number]
+

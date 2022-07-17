@@ -17,6 +17,7 @@ Example of Blorum Extension manifest.json
     "before_init": [
         "some_js_got_executed_before_blorum_init.js"
     ],
+    "after_router": [],
     "after_init": [
         "some_js_got_executed_before_blorum_init.js"
     ],

@@ -72,21 +72,29 @@ X-Forwarded-From
 
 *Rate limits are based on requests per hour.
 
-#### ip_rate_limit_post
+#### ip_rate_limit_get
 ##### default
-12
+2400
+
+#### ip_rate_limit_create
+##### default
+{
+
+	"article": 12,
+	
+	"posts": 12,
+
+	"notes": 30,
+	
+	"react": 64,
+	
+	"comment": 60
+	
+}
 
 #### ip_rate_limit_register
 ##### default
 1
-
-#### ip_rate_limit_react
-##### default
-64
-
-#### ip_rate_limit_comment
-##### default
-60
 
 #### ip_rate_limit_remove
 ##### default
@@ -94,7 +102,9 @@ X-Forwarded-From
 
 	"article": 12,
 	
-	"posts": 12,
+	"posts": 20,
+
+	"notes": 30,
 	
 	"react": 128,
 	
@@ -102,9 +112,21 @@ X-Forwarded-From
 	
 }
 
-#### ip_rate_limit_article
+#### ip_rate_limit_edit
 ##### default
-12
+{
+
+	"article": 12,
+	
+	"posts": 20,
+
+	"notes": 30,
+	
+	"react": 128,
+	
+	"comment": 60
+	
+}
 
 #### ip_rate_limit_login
 ##### default
