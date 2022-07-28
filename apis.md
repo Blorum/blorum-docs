@@ -7,7 +7,41 @@ If server-side unknown error happened: 500
 
 If rate limit reached: 429
 
+If session invalid: 412
+
 If you ask Blorum to brew coffee: 418
+
+# Site APIs
+## /site/info
+#### GET
+##### _Take params_
+> {
+> 	"require": ["logo", "description" ......]
+> }
+
+##### _Return_
+___If success___:
+
+status 200
+
+> {
+>	"logo": "http://..."
+>	......
+> }
+
+### Requirable list
+(result are examples)
+#### logo
+
+#### title
+
+#### description
+
+#### owner
+{
+	"avatar": ...
+	"name"
+}
 
 
 # User APIs
@@ -64,7 +98,7 @@ body:
 ##### POST
 _Take params_
 
-- token - String
+A valid Blorum Session Header
 
 _Return_
 
@@ -75,4 +109,19 @@ If error happened: 500
 
 ## /user/update
 
-## /user/suicide
+## /user/permissions
+##### GET
+_Take params_
+
+> {
+> 	"uid": [number]
+> }
+
+User could only get their own permissions, if they don't have the permission
+defined with user.permissions.read.
+
+_Return_
+
+If success: 200
+
+If error happened: 500

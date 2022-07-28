@@ -10,7 +10,11 @@ flags, or disable them with corresponding flags.
 
 ## True / False Flags
 
+Those flags stored in permissons.flags
+
 ### override_ip_rate_limits
+
+Those flags stored in permissions with corresponding keys.
 
 ## Categorical Flags
 
@@ -24,6 +28,11 @@ articles, posts, notes, comments:
 - 5: Allowed to perform action to everyones' contents.
 
 #### article.create
+##### description
+0: disallowed to create articles.
+1,2,3: allowed to create articles.
+4: allowed to create articles, even in protected tags.
+5: allowed to create articles, even in protected tags and categories.
 
 #### article.anonymous
 
@@ -117,6 +126,9 @@ articles, posts, notes, comments:
 
 #### user.statistics.read.sensitive
 
+#### user.permissions.read
+##### description
+0,1,2 will all result in users only has the permission to read their own permissions, 3 will allow them to read other "user" user's permissions, 4 and 5 will allow them to read anyone's permissions
 
 #### site.config.modify.regular
 

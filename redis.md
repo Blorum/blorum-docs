@@ -21,15 +21,7 @@ user_session:[uid]
 	}
 }
 
-### User rate limits
-##### key:
-user_rate_limit_[item]:[uid]
-##### value:
-[number]
+### Rate Limits
 
-### IP rate limits
-##### key:
-ip_rate_limit_[item]:x.y.z.w
-##### value:
-[number]
+Blorum used an algorithm called "Token Bucket" to do traffic controls, the only difference is that key were based on UID/IP instead of tokens
 

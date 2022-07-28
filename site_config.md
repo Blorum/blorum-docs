@@ -65,7 +65,7 @@ header
 
 #### ip_detect_header
 ##### default
-X-Forwarded-From
+X-Forwarded-For
 
 
 * Time were based on seconds.

@@ -6,8 +6,10 @@
 	"registered_at": [UTC Timestamp],
 	"create":{
 		"comment": [number],
+		"like": [number],
 		"react": [number],
 		"article": [number],
+		"post": [number],
 		"note": [number],	
 	},
 	"received": {
@@ -16,14 +18,36 @@
 			"article": [number],
 			"post": [number],
 			"comment": [number]
-		}
+		},
+		"like": [number],
+		"react": [number]
 	},
 	"read": {
-		"time": [number(approx. minutes)],
-		"article": [number],
-		"post": [number]
+		"day_visited": [number],
+		"article": {
+			"count": [number],
+			"total_time": [number(approx. minutes)]
+		},
+		"post": {
+			"count": [number],
+			"total_time": [number(approx. minutes)]
+		},
+	},
+	"rank":{
+		"like": [
+			{
+				"uid": [number]
+			}
+		],
+		"liked_by": [],
+		"reply": []
 	},
 	"invite": [uid1, uid2.....]
 }
 
 ## User Session Statistics Prototype
+> "statistics": {
+>	"date": [timestamp],
+>	"userAgent": "xxx",
+>	"ip": "xxx"
+> }
