@@ -2,7 +2,11 @@
 
 Blorum has some built-in roles of permissions, for atomized control, Flags needed to be manipulated.
 
-User roles does not actually grant user permissions, when an user were granted with certain roles, they will in the meanwhile be granted with flags defined in modules/permission.mjs. Allowed atomized permission control. *Except for Omni*
+User roles defined permissions that an user have, an user could have different user roles. Permissions could be assigned to roles.
+
+If an user has multiple roles that has conflict permissions, the highest permission will be left.
+
+*Except for Omni*
 
 ### Omni
 

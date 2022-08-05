@@ -53,6 +53,17 @@ articles, posts, notes, comments:
 #### article.report
 
 
+#### note.create
+
+#### note.anonymous
+
+#### note.edit
+
+#### note.remove
+
+#### note.report
+
+
 #### post.create
 
 #### post.anonymous
@@ -70,17 +81,6 @@ articles, posts, notes, comments:
 #### post.react.remove
 
 #### post.report
-
-
-#### note.create
-
-#### note.anonymous
-
-#### note.edit
-
-#### note.remove
-
-#### note.report
 
 
 #### comment.anonymous
