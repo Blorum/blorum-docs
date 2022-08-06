@@ -2,11 +2,7 @@
 
 Flags are the atom controller of Blorum's permissions.
 
-They are just the prerequisite for a user to perform certain actions, specific 
-
-contents could set different policies, allowing a user to act without those 
-
-flags, or disable them with corresponding flags.
+Flags were used to assign permissions to user roles.
 
 ## True / False Flags
 
