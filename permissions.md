@@ -4,7 +4,7 @@ Blorum has some built-in roles of permissions, for atomized control, you need to
 
 Roles could assign users permissions and rate limits, an user could have different user roles. Permissions could be assigned to roles.
 
-If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left.
+If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left, except the _cookie_expire_after_, for the cookie expire time, only the smallest value will be applied.
 
 An user must have at least one user role.
 
@@ -12,6 +12,84 @@ Since JSON does not support Infinity, +Infinity will be stored as -1.
 
 
 Roles' permissions could be as specific as certain forums, category, etc..., but an arbitrary permission to one type could also be applied. Such permission were stored in the key "any"(See default_permission.sql).
+
+## Permission Data Structure for Roles
+Take a possible permisson of a site's moderator as an example
+```
+{
+	
+	"with_rate_limit": 1, //Indicate that this roles has rate limits with it
+
+	"permissions": {
+	
+		"flags": ["override_ip_ratelimts"],
+		
+		"max_session": 10, 
+		
+		"cookie_expire_after": 13150000000
+		
+		"forums":{
+			"0":{
+				"flags": ["edit_info"]
+				"remove_post": 5
+			} //This moderator could edit the info and delete everyone's posts in 
+                the forum with fid=0
+		}
+		"article": {
+			"create": 5,
+			"edit": 4,
+			"remove": 2
+		} //See what does those numbers indicate in flags.md
+		
+	},
+	
+	"rate_limits": {
+		
+		"edit": {
+			
+			"post": 60,
+			
+			"react": 120,
+			
+			"article": 60,
+			
+			"comment": 120
+		
+		},
+		
+		"login": 20,
+		
+		"create": {
+		
+			"post": 60,
+			
+			"react": 120,
+			
+			"article": 60,
+			
+			"comment": 120
+		
+		},
+		
+		"remove": {
+		
+			"post": 60,
+			
+			"react": 120,
+			
+			"article": 60,
+			
+			"comment": 120
+		
+		}
+		
+	}
+
+}
+
+```
+
+## Builtin Roles
 
 ### Omni
 **This role is code-builtin, and could not be removed with tweaks in database.**
