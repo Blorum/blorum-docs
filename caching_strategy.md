@@ -5,9 +5,9 @@ Blorum has a default caching strategy, which you could tweak or just disable it.
 As a young project, I can't do any large-scale statistic tests to find the most optimized default config.
 
 
-Blorum use **Redis** to cache.
+Blorum use **Redis** to cache and to store thread-shared states.
 
-Blorum were not designed to be running on multiple machine, therefore Blorum will not adapt **Redis Cluster**. if such demand do exists, a new project called Blorux will be started in the future.
+Blorum were not designed to be running on multiple machine, therefore Blorum will not adapt **Redis Cluster**. However, after Blorum is finished, a new project called Blorux will be started in the future. Blorux will bring Blorum with multi-thread capacity since blorum is desinged to be prepared for multi-threading.
 
 ## Overall
 

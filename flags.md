@@ -9,6 +9,10 @@ Flags were used to assign permissions to user roles.
 Those flags stored in permissons.flags
 
 ### override_ip_rate_limits
+Allow an user to override IP based rate limits.
+
+### administrative
+For detail please read below, it cooperate with other flags to limit permissions.
 
 Those flags stored in permissions with corresponding keys.
 
@@ -20,8 +24,12 @@ articles, posts, notes, comments:
 - 1: Allowed to perform action to themselves' contents.(For notes, it is the ability to create note with public visibility.)
 - 2: Allowed to perform action to themselves' contents, even if it is "protected".
 - 3: Allowed to perform action to everyones' contents, except those with an author that has the role of admin or moderator, and articles/posts with "protected".
-- 4: Allowed to perform action to everyones' contents, except those with an author that has the role of admin or moderator.
+- 4: Allowed to perform action to everyones' contents, except those with an author that has administrative flag
 - 5: Allowed to perform action to everyones' contents.
+
+## Fallback permissions
+Fallback permissions stored in "default", those 0-5 permission levels could be assigned to user's permission of specific category, tag... And could also be assigned to default fallback permissions when a resource is not protected by laws based on things like category.
+
 
 #### article.create
 ##### description
@@ -124,7 +132,7 @@ articles, posts, notes, comments:
 
 #### user.permissions.read
 ##### description
-0,1,2 will all result in users only has the permission to read their own permissions, 3 will allow them to read other "user" user's permissions, 4 and 5 will allow them to read anyone's permissions
+0 will all result in users only has the permission to read their own permissions, 1 will allow them to read other user's permissions(except those with *administrative* flag), 2 will allow them to read anyone's permissions
 
 #### site.config.modify.regular
 
@@ -136,3 +144,4 @@ articles, posts, notes, comments:
 
 
 ### Varible Flags
+

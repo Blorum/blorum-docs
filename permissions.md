@@ -1,12 +1,14 @@
-# Design document - Permissions
+er# Design document - Permissions
 
 Blorum has some built-in roles of permissions, for atomized control, you need to change Flags of existing roles or create a new user role.
 
 Roles could assign users permissions and rate limits, an user could have different user roles. Permissions could be assigned to roles.
 
-If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left, except the _cookie_expire_after_, for the cookie expire time, only the smallest value will be applied.
+If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left, so does the max_session limit. _cookie_expire_after_ is different, for the cookie expire time, only the smallest value will be applied.
 
-An user must have at least one user role.
+**An user must have at least one user role.**
+
+User does not necessarily need a role with rate limits defined, if user has no roles defining rate limits, they are still confined by IP-based rate limits. Unless they have a role that has flag *override_ip_rate_limits*. However, a warning log will be generated if Blorum detected that an user don't have a role with rate limits or flag *override_ip_rate_limits*.
 
 Since JSON does not support Infinity, +Infinity will be stored as -1.
 
