@@ -134,6 +134,10 @@ Fallback permissions stored in "default", those 0-5 permission levels could be a
 ##### description
 0 will all result in users only has the permission to read their own permissions, 1 will allow them to read other user's permissions(except those with *administrative* flag), 2 will allow them to read anyone's permissions
 
+#### user.session_list.read
+##### description
+0 will all result in users only has the permission to read their own session_list, 1 will allow them to read other user's session_list(except those with *administrative* flag), 2 will allow them to read anyone's session_list.
+
 #### site.config.modify.regular
 
 #### user.permission.modify

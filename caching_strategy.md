@@ -2,16 +2,16 @@
 
 Blorum has a default caching strategy, which you could tweak or just disable it.
 
-As a young project, I can't do any large-scale statistic tests to find the most optimized default config.
+As Blorum is a young project, I can't do any large-scale statistic tests to find the most optimized default config.
 
 
 Blorum use **Redis** to cache and to store thread-shared states.
 
-Blorum were not designed to be running on multiple machine, therefore Blorum will not adapt **Redis Cluster**. However, after Blorum is finished, a new project called Blorux will be started in the future. Blorux will bring Blorum with multi-thread capacity since blorum is desinged to be prepared for multi-threading.
+Blorum were not designed to be running on multiple machine, therefore Blorum will not adapt **Redis Cluster**. However, after Blorum is finished, a new project called Blorux will be started in the future. Blorux will bring Blorum with multi-thread capacity since blorum is designed to be prepared for multi-threading.
 
 ## Overall
 
-Blorum assume that there is three circumstances that a cache, would be the best.
+Blorum assume that there is three circumstances that maintaining a cache, would be the best.
 
 - When a content is initially created, and does not show statistically important decline compared to average viewer stats.
 
