@@ -7,7 +7,7 @@ Roles could assign users permissions and rate limits, or deprive them with permi
 ## Type of user roles
 There are two types of user roles: **grantive** and **limitive** 
 ### Multiple grantive role
-If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left, so does the max_session limit. _cookie_expire_after_ is different, for the cookie expire time, only the smallest value will be applied.
+If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left, so does the max_session limit.
 
 limitive is considered before grantive.
 
@@ -31,7 +31,9 @@ Since JSON does not support Infinity, +Infinity will be stored as -1.
 Roles' permissions could be as specific as certain forums, category, etc..., but an arbitrary permission to one type could also be applied. Such permission were stored in the key "any"(See default_permission.sql).
 
 ## Permission Data Structure for Roles
-Take a possible permisson of a site's moderator as an example
+Take a possible permission of a site's moderator as an example
+**This is a grantive role**
+
 ```
 {
 	
@@ -39,7 +41,7 @@ Take a possible permisson of a site's moderator as an example
 
 	"permissions": {
 	
-		"flags": ["override_ip_ratelimts"],
+		"flags": ["override_ip_ratelimits"],
 		
 		"max_session": 10, 
 		
@@ -106,9 +108,32 @@ Take a possible permisson of a site's moderator as an example
 
 ```
 
+Take a possible limitation-permission of a untrusted user as another example
+**This is a limitive role**
+```
+{
+	
+	"with_rate_limit": 0,
+	"permissions": {
+		"flags": [],
+	},
+	"rate_limits": {
+		"login": 10,
+		"create": {
+			"post": 10,
+			"react": 12,
+			"article": 0,			
+			"comment": 10
+		}
+	}
+}
+
+```
+
+
 ## Builtin Roles
 
-### Omni
+### Omni (pseudo)
 **It is not an actual role, and could not be removed with tweaks in database.**
 
 User with uid = 1 automatically has this role. This role cannot be granted to other users.
