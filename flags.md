@@ -18,8 +18,7 @@ Those flags stored in permissions with corresponding keys.
 
 ## Categorical Flags
 
-articles, posts, notes, comments:
-
+Type 1:
 - 0: Unallowed.
 - 1: Allowed to perform action to themselves' contents.(For notes, it is the ability to create note with public visibility.)
 - 2: Allowed to perform action to themselves' contents, even if it is "protected".
