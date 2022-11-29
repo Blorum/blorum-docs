@@ -390,34 +390,64 @@ let permSum = {
 };
 ```
 
-with_rate_limit : If this role comes with a rate limit constraint.
+`with_rate_limit` : If this role comes with a rate limit constraint.
 
-permissions.flags : Store flags. See flags.md
+`*.edit_list` :  The permission to edit `allow_list`. 0 = disallow, 1 = allow
 
-permissions.max_session : Maximum sessions(login status) a user could have.
+`permissions.flags` : Store flags. See flags.md
 
-permissions.cookie_expire_after : Time(seconds) for a session to expire.
+`permissions.max_session` : Maximum sessions(login status) a user could have.
 
-permissions.user.permission.read.default : The ability to read an user's permission(sum), see footnote[^1]
+`permissions.cookie_expire_after` : Time(seconds) for a session to expire.
 
-permissions.user.permission.read.all: Ignore allow list. Only consider read.default
+`permissions.user.permission.read.default` : The ability to read an user's permission(sum), see footnote[^1]
 
-permissions.user.permission.read.allow: Specific users' permission that this role could read.
+`permissions.user.permission.read.all`: Ignore allow list. Only consider read.default
 
-permissions.user.role.read.default : See footnote[^3]
+`permissions.user.permission.read.allow`: Specific users' permission that this role could read.
 
-permissions.user.role.read.all : See footnote[^1]
+`permissions.user.role.read.default` : See footnote[^3]
 
-permissions.user.role.read.allow: Allow list for user reading the role of other users(The list of roles)
+`permissions.user.role.read.all` : See footnote[^2]
 
-permission.role.read.default: 
+`permissions.user.role.read.allow`: Allow list for user reading the role of other users (Only the list of roles). The list it self is a list of role, and user with roles defined in the list could be readed (for their list of roles).
 
+`permissions.user.role.grant.allow.\*` / `permissions.user.role.remove.\*`: Same as the definition in `permissions.user.role.read`, those are the restrictants of what users could this user perform action on, the specific roles that this user are allowed to grant/remove on others are defined in `permission.role.read`.
 
+`permission.role.read.default`: See footnote[^4]
+
+`permission.role.grant.default`: 0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as role with such permission exists.)
+
+`permission.role.remove.default`, `permission.role.edit.default`: Same as above, but action is remove/edit.
+
+`permission.role.edit.permissions.default`: 0 = You cannot edit any permissions. 1 = You can edit permissions as allow list has defined. 2 = You can edit any permissions (**Caution!** This means that users could grant any permission that they want by granting their user role with the desired permission.)
+
+permission.role.edit.permissions.allow: This is a special allow list. The objects stored in it are formatted as follow
+{
+	"lookup": [Permission Lookup Object],
+	"numeric_edit": {
+		"max": [Numeric Value],
+		"min": [Numeric Value]
+	}
+}
+
+Permission Lookup Object is basically an sorted array, it indicate the keyname of a permission, for example, permission.role.edit are stored as
+["permission","role","edit"]
+
+Wildcard is supported, for example, if you want this role to be able to grant others any permissions under user.role category, the Permission Lookup Object might look like:
+["permission","user","role","\*"]
+
+If the value of a permission key shoule be numeric, the values inside `numeric_edit` could limit the max(increasing) and the min(decreasing) value that the role can set. This value will only exists if the permission is numeric.
+
+permission.article.read
 
 ---
 
 [^1]: 0 = can only read self's {{something}}, 1 = able to read normal user's {{something}}, 2 = able to read everyone's {{something}}.
 
-[^2]: For "all", value 1 = ignore allow list (Bypass) , 0 = consider allow list.
+[^2]: For "all", value 1 = ignore allow list (Bypass, allow everything) , 0 = consider allow list.
 
-[^3]: 0 = cannot read anyone, include the user itself's {{something}. 1 = only allow reading self {{something}. 2 = allow reading non-administrative (flag:administrative) users' {{something}. 3 = Allow reading everyone's {{something}.
+[^3]: 0 = cannot read anyone, include the user itself's {{something}}. 1 = only allow reading self {{something}}. 2 = allow reading non-administrative (flag:administrative) users' {{something}}. 3 = Allow reading everyone's {{something}}. {{something}} refer to  what is the permission actually controlling. 
+
+[^4]: 0 = Disallow any such operation, 1 = allow such operation on targets defined in the allowlist, 2 = allow operation on all targets (Bypassing allow list)
+
