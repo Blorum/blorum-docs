@@ -392,7 +392,7 @@ let permSum = {
 
 `with_rate_limit` : If this role comes with a rate limit constraint.
 
-`*.edit_list` :  The permission to edit `allow_list`. 0 = disallow, 1 = allow
+`*.all` : For "all", value 1 = ignore allow list (Bypass, allow everything) , 0 = consider allow list.
 
 `permissions.flags` : Store flags. See flags.md
 
@@ -408,8 +408,6 @@ let permSum = {
 
 `permissions.user.role.read.default` : See footnote[^3]
 
-`permissions.user.role.read.all` : See footnote[^2]
-
 `permissions.user.role.read.allow`: Allow list for user reading the role of other users (Only the list of roles). The list it self is a list of role, and user with roles defined in the list could be readed (for their list of roles).
 
 `permissions.user.role.grant.allow.\*` / `permissions.user.role.remove.\*`: Same as the definition in `permissions.user.role.read`, those are the restrictants of what users could this user perform action on, the specific roles that this user are allowed to grant/remove on others are defined in `permission.role.read`.
@@ -418,11 +416,11 @@ let permSum = {
 
 `permission.role.grant.default`: 0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as role with such permission exists.)
 
-`permission.role.remove.default`, `permission.role.edit.default`: Same as above, but action is remove/edit.
+`permission.role.remove.default`, `permission.role.edit.default`: Same as above, but the action is remove/edit.
 
-`permission.role.edit.permissions.default`: 0 = You cannot edit any permissions. 1 = You can edit permissions as allow list has defined. 2 = You can edit any permissions (**Caution!** This means that users could grant any permission that they want by granting their user role with the desired permission.)
+`permission.role.edit.permissions.default`: 
 
-permission.role.edit.permissions.allow: This is a special allow list. The objects stored in it are formatted as follow
+`permission.role.edit.permissions.allow`: This is a special allow list. The objects stored in it are formatted as follow
 {
 	"lookup": [Permission Lookup Object],
 	"numeric_edit": {
@@ -439,13 +437,17 @@ Wildcard is supported, for example, if you want this role to be able to grant ot
 
 If the value of a permission key shoule be numeric, the values inside `numeric_edit` could limit the max(increasing) and the min(decreasing) value that the role can set. This value will only exists if the permission is numeric.
 
-permission.article.read
+Permission Lookup Object can point to `permission.role.edit.permission.[something]`. Blorum will parse it correctly. This could be confusing, still. Since technically it could form a permission granting chain. This actually makes sense for webmasters who want atomic permission control, but for most scenarios, you might want to just use one-depth and default=2 as for permission allocation.
+
+Permission Lookup Object can point to `allow_list`, this will grant the permission of giving a role to edit pointed allow_list
+
+`permission.article.read.default`
 
 ---
 
 [^1]: 0 = can only read self's {{something}}, 1 = able to read normal user's {{something}}, 2 = able to read everyone's {{something}}.
 
-[^2]: For "all", value 1 = ignore allow list (Bypass, allow everything) , 0 = consider allow list.
+[^2]:
 
 [^3]: 0 = cannot read anyone, include the user itself's {{something}}. 1 = only allow reading self {{something}}. 2 = allow reading non-administrative (flag:administrative) users' {{something}}. 3 = Allow reading everyone's {{something}}. {{something}} refer to  what is the permission actually controlling. 
 
