@@ -1,13 +1,13 @@
 # Design document - Permissions
 
-Blorum has some built-in roles of permissions, for atomized control, you need to change Flags of existing roles or create a new user role.
+Blorum has some built-in roles of permissions, for atomized control, you need to change the Flags of existing roles or create a new user role.
 
-Roles could assign users permissions and rate limits, or deprive them with permissions, an user could have different user roles. Permissions could be assigned to roles.
+Roles could assign users permissions and rate limits, or deprive them of permissions, users could have different user roles. Permission could be assigned to roles.
 
 ## Type of user roles
 There are two types of user roles: **grantive** and **limitive** 
-### Multiple grantive role
-If an user has multiple roles that has conflict permissions / role rate limits, the highest permission / rate limits will be left, so does the max_session limit.
+### Multiple grantive roles
+If a user has multiple roles that have conflict permissions / role rate limits, the highest permission / rate limits will be left, and so does the max_session limit.
 
 limitive is considered before grantive.
 
@@ -15,29 +15,29 @@ limitive is considered before grantive.
 The permission sum of a user could be summarized into this formula:
 #### permSum = max(grantive_role) - max(limitive_role)
 
-Limitive role has higher priority than grantive role. The maximum sum of limitation is checked first, if the action of user is not limited by it, Blorum will check user's grantive role's permission sum to see if user were allowed to perform the action. 
+A limitive role has higher priority than a grantive role. The maximum sum of limitation is checked first, and if the action of the user is not limited by it, Blorum will check the user's grantive role's permission sum to see if the user was allowed to perform the action. 
  
 ## Rate limits
-Rate limits also follow the same judgment: the minimum rate limit values (so it's the maximum limitation) given by limitive role sum is considered first, then the maximum rate limit values (so it's the minimum limitation) given by grantive roles was considered.
+Rate limits also follow the same judgment: the minimum rate limit values (so it's the maximum limitation) given by limitive role sum are considered first, then the maximum rate limit values (so it's the minimum limitation) given by grantive roles were considered.
 
 ## Other rules
 **An user must have at least one grantive user role.**
 
-User does not necessarily need a role with rate limits defined, if user has no roles defining rate limits, they are still confined by IP-based rate limits. Unless they have a role that has flag *override_ip_rate_limits*. However, a warning log will be generated if Blorum detected that an user don't have a role with rate limits or flag *override_ip_rate_limits*.
+The user does not necessarily need a role with rate limits defined, if a user has no roles defining rate limits, they are still confined by IP-based rate limits. Unless they have a role that has flag *override_ip_rate_limits*. However, a warning log will be generated if Blorum detected that a user doesn't have a role with rate limits or flag *override_ip_rate_limits*.
 
 Since JSON does not support Infinity, +Infinity will be stored as -1.
 
 
-Roles' permissions could be as specific as certain forums, category, etc..., but an arbitrary permission to one type could also be applied. Such permission were stored in the key "any"(See default_permission.sql).
+Roles' permissions could be as specific as certain forums, categories, etc..., but arbitrary permission to one type could also be applied. Such permission was stored in the key "any"(See default_permission.sql).
 
 ## Permission Data Structure for Roles
-Take a possible permission of a site's moderator as an example
+Take the possible permission of a site's moderator as an example
 **This is a grantive role**
 
 ```
 {
 	
-	"with_rate_limit": 1, //Indicate that this roles has rate limits with it
+	"with_rate_limit": 1, //Indicate that these roles have rate limits with it
 
 	"permissions": {
 	
@@ -58,7 +58,7 @@ Take a possible permission of a site's moderator as an example
 			"create": 5,
 			"edit": 4,
 			"remove": 2
-		} //See what does those numbers indicate in flags.md
+		} //See what those numbers indicate in flags.md
 		
 	},
 	
@@ -108,7 +108,7 @@ Take a possible permission of a site's moderator as an example
 
 ```
 
-Take a possible limitation-permission of a untrusted user as another example
+Take a possible limitation-permission of an untrusted user as another example
 **This is a limitive role**
 ```
 {
@@ -134,18 +134,18 @@ Take a possible limitation-permission of a untrusted user as another example
 ## Builtin Roles
 
 ### Guest (pseudo)
-User with uid = 1 automatically has this role.
+A user with uid = 1 automatically has this role.
 
 This role is reserved for guests with no login status.
 
 ### Omni (pseudo)
-**It is not an actual role, and could not be removed with tweaks in database.**
+**It is not an actual role, and could not be removed with tweaks in the database.**
 
-User with uid = 2 automatically has this role. This role cannot be granted to other users.
+The user with uid = 2 automatically has this role. This role cannot be granted to other users.
 
-This permission allowed its user to bypass all verfications and rate limits, no restrictions will be applied.
+This permission allowed its user to bypass all verifications and rate limits, no restrictions will be applied.
 
-Extensions developers should also implement so.
+Extension developers should also implement so.
 
 ### Admin
 
@@ -266,11 +266,11 @@ let permSum = {
                         "default": 0,
                         "constraint": {
                             "category": {
-                                "all": 0, //Ignore category restriction when removing post
+                                "all": 0, //Ignore category restriction when removing a post
                                 "allow": []
                             },
                             "tag": {
-                                "all": 0, //Ignore tag restriction when removing post
+                                "all": 0, //Ignore tag restriction when removing a post
                                 "allow": []
                             }
                         },
@@ -296,11 +296,11 @@ let permSum = {
                     "post": {
                         "default": 0,
                         "category": {
-                            "all": 0, //Ignore category restriction when removing post
+                            "all": 0, //Ignore category restriction when removing a post
                             "allow": []
                         },
                         "tag": {
-                            "all": 0, //Ignore tag restriction when removing post
+                            "all": 0, //Ignore tag restriction when removing a post
                             "allow": []
                         }
                     }
@@ -400,7 +400,7 @@ let permSum = {
 
 `permissions.cookie_expire_after` : Time(seconds) for a session to expire.
 
-`permissions.user.permission.read.default` : The ability to read an user's permission(sum), see footnote[^1]
+`permissions.user.permission.read.default` : The ability to read a user's permission(sum), see footnote[^1]
 
 `permissions.user.permission.read.all`: Ignore allow list. Only consider read.default
 
@@ -408,19 +408,19 @@ let permSum = {
 
 `permissions.user.role.read.default` : See footnote[^3]
 
-`permissions.user.role.read.allow`: Allow list for user reading the role of other users (Only the list of roles). The list it self is a list of role, and user with roles defined in the list could be readed (for their list of roles).
+`permissions.user.role.read.allow`: Allow list for user reading the role of other users (Only the list of roles). The list itself is a list of roles, and users with roles defined in the list could be read (for their list of roles).
 
-`permissions.user.role.grant.allow.\*` / `permissions.user.role.remove.\*`: Same as the definition in `permissions.user.role.read`, those are the restrictants of what users could this user perform action on, the specific roles that this user are allowed to grant/remove on others are defined in `permission.role.read`.
+`permissions.user.role.grant.allow.\*` / `permissions.user.role.remove.\*`: Same as the definition in `permissions.user.role.read`, those are the restrictions of what users could this user perform an action on, the specific roles that this user is allowed to grant/remove on others are defined in `permission.role.read`.
 
 `permission.role.read.default`: See footnote[^4]
 
-`permission.role.grant.default`: 0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as role with such permission exists.)
+`permission.role.grant.default`: 0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as a role with such permission exists.)
 
 `permission.role.remove.default`, `permission.role.edit.default`: Same as above, but the action is remove/edit.
 
 `permission.role.edit.permissions.default`: 
 
-`permission.role.edit.permissions.allow`: This is a special allow list. The objects stored in it are formatted as follow
+`permission.role.edit.permissions.allow`: This is a special allow list. The objects stored in it are formatted as follows
 {
 	"lookup": [Permission Lookup Object],
 	"numeric_edit": {
@@ -429,15 +429,15 @@ let permSum = {
 	}
 }
 
-Permission Lookup Object is basically an sorted array, it indicate the keyname of a permission, for example, permission.role.edit are stored as
+Permission Lookup Object is basically a sorted array, it indicates the keyname of a permission, for example, permission.role.edit are stored as
 ["permission","role","edit"]
 
-Wildcard is supported, for example, if you want this role to be able to grant others any permissions under user.role category, the Permission Lookup Object might look like:
+Wildcard is supported, for example, if you want this role to be able to grant others any permissions under user.role category, the Permission Lookup Object might look like this:
 ["permission","user","role","\*"]
 
-If the value of a permission key shoule be numeric, the values inside `numeric_edit` could limit the max(increasing) and the min(decreasing) value that the role can set. This value will only exists if the permission is numeric.
+If the value of a permission key should be numeric, the values inside `numeric_edit` could limit the max(increasing) and the min(decreasing) value that the role can set. This value will only exist if the permission is numeric.
 
-Permission Lookup Object can point to `permission.role.edit.permission.[something]`. Blorum will parse it correctly. This could be confusing, still. Since technically it could form a permission granting chain. This actually makes sense for webmasters who want atomic permission control, but for most scenarios, you might want to just use one-depth and default=2 as for permission allocation.
+Permission Lookup Object can point to `permission.role.edit.permission.[something]`. Blorum will parse it correctly. This could be confusing, still. Since technically it could form a permission-granting chain. This makes sense for webmasters who want atomic permission control, but for most scenarios, you might want to just use one-depth and default=2 as permission allocation.
 
 Permission Lookup Object can point to `allow_list`, this will grant the permission of giving a role to edit pointed allow_list
 
@@ -449,7 +449,7 @@ Permission Lookup Object can point to `allow_list`, this will grant the permissi
 
 [^2]:
 
-[^3]: 0 = cannot read anyone, include the user itself's {{something}}. 1 = only allow reading self {{something}}. 2 = allow reading non-administrative (flag:administrative) users' {{something}}. 3 = Allow reading everyone's {{something}}. {{something}} refer to  what is the permission actually controlling. 
+[^3]: 0 = cannot read anyone, include the user itself's {{something}}. 1 = only allow reading self {{something}}. 2 = allow reading non-administrative (flag:administrative) users' {{something}}. 3 = Allow reading everyone's {{something}}. {{something}} refers to what is the permission actually controls. 
 
 [^4]: 0 = Disallow any such operation, 1 = allow such operation on targets defined in the allowlist, 2 = allow operation on all targets (Bypassing allow list)
 
