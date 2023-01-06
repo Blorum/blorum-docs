@@ -20,6 +20,8 @@ A limitive role has higher priority than a grantive role. The maximum sum of lim
 ## Rate limits
 Rate limits also follow the same judgment: the minimum rate limit values (so it's the maximum limitation) given by limitive role sum are considered first, then the maximum rate limit values (so it's the minimum limitation) given by grantive roles were considered.
 
+Blorum only provides rate limits for those APIs that have an explicit side-effect, thus, APIs like fetching the content of a post will not be able to be rate-limited with Blorum Permission System, and such limitation should be deployed on a higher level, like nginx.
+
 ## Other rules
 **An user must have at least one grantive user role.**
 
@@ -152,6 +154,11 @@ Extension developers should also implement so.
 ### Moderator
 
 ## Actual complete grantive role permission JSON structure
+
+A user's grantive roles will be finally summed, and this is the structure of a finally computed grantive role. You can also understand it as the fallback if any permission is not defined by any roles that the user has.
+
+A grantive role does not necessarily need to have all those fields below, the field that it has will be counted in the summation. For example, a user only has role `a` and role `b`, `a` only defined `user.permission.read.default` permission as `2` and `b` only defined `user.permission.read.default` as `3`, eventually, in the summation of this user's grantive role, field `user.permission.read.default` will be `3` and all other fields will remain the same as below.
+
 
 ```
 let permSum = {
