@@ -1,4 +1,4 @@
-# Document - Redis
+# Redis use
 
 Blorum use Redis to store user tokens, permissions and rate limits.
 

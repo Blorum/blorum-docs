@@ -1,4 +1,4 @@
-# Documents - Caching strategy
+# Caching strategy
 
 Blorum has a default caching strategy, which you could tweak or just disable it.
 

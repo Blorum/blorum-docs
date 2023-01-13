@@ -1,4 +1,4 @@
-# Design document - Permissions
+# Permissions
 
 Blorum has some built-in roles of permissions, for atomized control, you need to change the Flags of existing roles or create a new user role.
 

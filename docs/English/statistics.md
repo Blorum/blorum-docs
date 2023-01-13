@@ -1,4 +1,4 @@
-# Documents - Statistics
+# Statistics
 
 ## User Statistics Prototype
 {

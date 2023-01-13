@@ -1,4 +1,4 @@
-# Document - Flags
+# Flags
 
 Flags are the atom controller of Blorum's permissions.
 

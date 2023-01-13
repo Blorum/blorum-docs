@@ -1,4 +1,4 @@
-# Blorum Logging Function
+# Logging Function
 
 ## CLI-side logging
 This logger is more of debugging purpose, by default level(warning) it normally won't trigger.

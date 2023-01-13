@@ -1,4 +1,4 @@
-# Documents - APIs
+# APIs
 
 Those APIs are meant to be designed in RESTful.
 
