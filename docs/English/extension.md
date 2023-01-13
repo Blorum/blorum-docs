@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # Extension
 
 Building Blorum Extensions is extremely easy with anyone who know how to code JavaScript. Since you can proxy/replace original blorum functions.

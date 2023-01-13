@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # Site config
 
 Those configs will be loaded into Redis database in Blorum's initialization process.

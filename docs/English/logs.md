@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # Logging Function
 
 ## CLI-side logging

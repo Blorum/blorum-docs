@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # Statistics
 
 ## User Statistics Prototype

@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # Redis use
 
 Blorum use Redis to store user tokens, permissions and rate limits.

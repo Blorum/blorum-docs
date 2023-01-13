@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # ScheduleDaemon
 scheduled.mjs is one of the core component of Blorum. It handles...
 

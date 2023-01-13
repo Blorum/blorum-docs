@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # Articles
 ## Status
 JSON

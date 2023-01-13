@@ -1,3 +1,7 @@
+---
+layout: default
+parent: English Documents
+---
 # APIs
 
 Those APIs are meant to be designed in RESTful.
