@@ -42,17 +42,11 @@ Take the possible permission of a site's moderator as an example
 
 ```
 {
-	
 	"with_rate_limit": 1, //Indicate that these roles have rate limits with it
-
 	"permissions": {
-	
 		"flags": ["override_ip_ratelimits"],
-		
 		"max_session": 10, 
-		
 		"cookie_expire_after": 13150000000
-		
 		"forums":{
 			"0":{
 				"flags": ["edit_info"]
@@ -65,60 +59,35 @@ Take the possible permission of a site's moderator as an example
 			"edit": 4,
 			"remove": 2
 		} //See what those numbers indicate in flags.md
-		
 	},
-	
-	"rate_limits": {
-		
+	"rate_limits": {	
 		"edit": {
-			
 			"post": 60,
-			
 			"react": 120,
-			
 			"article": 60,
-			
 			"comment": 120
-		
 		},
-		
 		"login": 20,
-		
 		"create": {
-		
 			"post": 60,
-			
 			"react": 120,
-			
 			"article": 60,
-			
 			"comment": 120
-		
 		},
-		
 		"remove": {
-		
 			"post": 60,
-			
 			"react": 120,
-			
 			"article": 60,
-			
 			"comment": 120
-		
 		}
-		
 	}
-
 }
-
 ```
 
 Take a possible limitation-permission of an untrusted user as another example
 **This is a limitive role**
 ```
-{
-	
+{	
 	"with_rate_limit": 0,
 	"permissions": {
 		"flags": [],
@@ -175,12 +144,14 @@ let permSum = {
             "permission": {
                 "read": {
                     "default": 0,
+                    "all":0,
                     "allow": []
                 }
             },
             "role": {
                 "read": {
                     "default": 0,
+                    "all":0,
                     "allow": []
                 }
             }
@@ -188,25 +159,33 @@ let permSum = {
         "role": {
             "read": {
                 "default": 0,
+                "all":0,
                 "allow": []
             },
             "grant": {
                 "default": 0,
+                "all":0,
                 "allow": []
             },
             "remove": {
                 "default": 0,
+                "all":0,
                 "allow": []
             },
+            "edit": {
+	            
+            }
         },
         "article": {
             "read": {
                 "default": 0,
                 //With those
                 "category": {
+	                "all":0,
                     "allow": []
                 },
                 "tag": {
+	                "all":0,
                     "allow": []
                 }
             },
@@ -214,9 +193,11 @@ let permSum = {
                 "default": 0,
                 //With those
                 "category": {
+	                "all":0,
                     "allow": []
                 },
                 "tag": {
+	                "all":0,
                     "allow": []
                 }
             },
@@ -229,17 +210,21 @@ let permSum = {
         },
         "category": {
             "edit": {
+	            "all":0,
                 "allow": []
             },
             "remove": {
+	            "all":0,
                 "allow": []
             }
         },
         "tag": {
             "edit": {
+	            "all":0,
                 "allow": []
             },
             "remove": {
+	            "all":0,
                 "allow": []
             }
         },
@@ -248,13 +233,16 @@ let permSum = {
                 "read": {
                     "category": {
                         "post_list": {
+	                        "all":0,
                             "allow": []
                         },
                         "self": { //Description and name
+	                        "all":0,
                             "allow": []
                         }
                     },
                     "tag": {
+	                    "all":0,
                         "allow": []
                     }
                 },
@@ -265,9 +253,11 @@ let permSum = {
                     "post": {
                         //With those
                         "category": {
+							"all":0,   
                             "allow": []
                         },
                         "tag": {
+	                        "all":0,
                             "allow": []
                         }
                     }
