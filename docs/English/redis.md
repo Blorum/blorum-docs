@@ -4,7 +4,7 @@ parent: English Documents
 ---
 # Redis use
 
-Blorum use Redis to store user tokens, permissions and rate limits.
+Blorum uses Redis to store user tokens, permissions, and rate limits.
 
 ### User sessions
 
@@ -27,5 +27,5 @@ user_session:[uid]
 
 ### Rate Limits
 
-Blorum used an algorithm called "Token Bucket" to do traffic controls, the only difference is that key were based on UID/IP instead of tokens
+Blorum used an algorithm called "Token Bucket" to do traffic controls, the only difference is that keys were based on UID/IP instead of tokens
 

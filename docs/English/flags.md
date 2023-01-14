@@ -10,28 +10,28 @@ Flags were used to assign permissions to user roles.
 
 ## True / False Flags
 
-Those flags stored in permissons.flags
+Those flags are stored in permissions.flags
 
 ### override_ip_rate_limits
-Allow an user to override IP based rate limits.
+Allow a user to override IP-based rate limits.
 
 ### administrative
-For detail please read below, it cooperate with other flags to limit permissions.
+For detail please read below, it cooperates with other flags to limit permissions.
 
-Those flags stored in permissions with corresponding keys.
+Those flags are stored in permissions with corresponding keys.
 
 ## Categorical Flags
 
 Type 1:
 - 0: Unallowed.
-- 1: Allowed to perform action to themselves' contents.(For notes, it is the ability to create note with public visibility.)
-- 2: Allowed to perform action to themselves' contents, even if it is "protected".
-- 3: Allowed to perform action to everyones' contents, except those with an author that has the role of admin or moderator, and articles/posts with "protected".
-- 4: Allowed to perform action to everyones' contents, except those with an author that has administrative flag
-- 5: Allowed to perform action to everyones' contents.
+- 1: Allowed to perform an action to themselves' contents. (For notes, it is the ability to create notes with public visibility.)
+- 2: Allowed to perform an action to themselves' contents, even if it is "protected".
+- 3: Allowed to perform an action to everyones' contents, except those with an author that has the role of admin or moderator, and articles/posts with "protected".
+- 4: Allowed to perform an action to everyones' contents, except those with an author that has the administrative flag
+- 5: Allowed to perform an action to everyones' contents.
 
 ## Fallback permissions
-Fallback permissions stored in "default", those 0-5 permission levels could be assigned to user's permission of specific category, tag... And could also be assigned to default fallback permissions when a resource is not protected by laws based on things like category.
+Fallback permissions are stored in "default", those 0-5 permission levels could be assigned to the user's permission of a specific category or tag, etc... And could also be assigned to default fallback permissions when a resource is not protected by laws based on things like category.
 
 
 #### article.create
