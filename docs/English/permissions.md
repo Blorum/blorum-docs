@@ -394,37 +394,53 @@ let permSum = {
 };
 ```
 
-`with_rate_limit` : If this role comes with a rate limit constraint.
+##### `with_rate_limit` 
+If this role comes with a rate limit constraint.
 
-`*.all` : For "all", value 1 = ignore allow list (Bypass, allow everything) , 0 = consider allow list.
+##### `*.all`
+For "all", value 1 = ignore allow list (Bypass, allow everything) , 0 = consider allow list.
 
-`permissions.flags` : Store flags. See flags.md
+##### `permissions.flags`
+Store flags. See flags.md
 
-`permissions.max_session` : Maximum sessions(login status) a user could have.
+##### `permissions.max_session`
+Maximum sessions(login status) a user could have.
 
-`permissions.cookie_expire_after` : Time(seconds) for a session to expire.
+##### `permissions.cookie_expire_after`
+Time(seconds) for a session to expire.
 
-`permissions.user.permission.read.default` : The ability to read a user's permission(sum), see footnote[^1]
+##### `permissions.user.permission.read.default`
+The ability to read a user's permission(sum), see footnote[^1]
 
-`permissions.user.permission.read.all`: Ignore allow list. Only consider read.default
+##### `permissions.user.permission.read.all`
+Ignore allow list. Only consider read.default
 
-`permissions.user.permission.read.allow`: Specific users' permission that this role could read.
+##### `permissions.user.permission.read.allow`
+Specific users' permission that this role could read.
 
-`permissions.user.role.read.default` : See footnote[^3]
+##### `permissions.user.role.read.default`
+See footnote[^3]
 
-`permissions.user.role.read.allow`: Allow list for user reading the role of other users (Only the list of roles). The list itself is a list of roles, and users with roles defined in the list could be read (for their list of roles).
+##### `permissions.user.role.read.allow`
+Allow list for user reading the role of other users (Only the list of roles). The list itself is a list of roles, and users with roles defined in the list could be read (for their list of roles).
 
-`permissions.user.role.grant.allow.\*` / `permissions.user.role.remove.\*`: Same as the definition in `permissions.user.role.read`, those are the restrictions of what users could this user perform an action on, the specific roles that this user is allowed to grant/remove on others are defined in `permission.role.read`.
+##### `permissions.user.role.grant.allow.\*` or `permissions.user.role.remove.\*`
+Same as the definition in  `permissions.user.role.read`, those are the restrictions of what users could this user perform an action on, the specific roles that this user is allowed to grant/remove on others are defined in  `permission.role.read`.
 
-`permission.role.read.default`: See footnote[^4]
+##### `permission.role.read.default`
+See footnote[^4]
 
-`permission.role.grant.default`: 0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as a role with such permission exists.)
+##### `permission.role.grant.default`
+0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as a role with such permission exists.)
 
-`permission.role.remove.default`, `permission.role.edit.default`: Same as above, but the action is remove/edit.
+##### `permission.role.remove.default` or `permission.role.edit.default`
+Same as above, but the action is remove/edit.
 
-`permission.role.edit.all`: This is a special "all" property. When it equals 1, the role will be able to edit permission as it wishes with no limitation.
+##### `permission.role.edit.all`
+This is a special "all" property. When it equals 1, the role will be able to edit permission as it wishes with no limitation.
 
-`permission.role.edit.allow`: This is a special allow list. It could be said that this is the most complex structure in the Blorum permission system. The objects stored in it are formatted as follows
+##### `permission.role.edit.allow`
+This is a special allow list. It could be said that this is the most complex structure in the Blorum permission system. The objects stored in it are formatted as follows
 
 {
 	"on": [List of Roles],
@@ -469,8 +485,7 @@ Permission Lookup Object can points to `allow_list`, as `list` in `value` will b
 
 When roles are computed into the final sum, this field will be compiled, and eventually generate a Set, the Set will have permission's keyname as the key, and allowed values as the value. This is also the only field that is stored differently inside Blorum.
 
-
-`permission.article.read.default`
+##### `permission.article.read.default`
 
 ---
 
