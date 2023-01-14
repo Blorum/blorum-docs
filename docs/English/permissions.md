@@ -165,7 +165,7 @@ let permSum = {
             "grant": {
                 "default": 0,
                 "all":0,
-                "allow": []
+                "allow": [{Permission Editing Object(See below for detail)}]
             },
             "remove": {
                 "default": 0,
@@ -173,7 +173,10 @@ let permSum = {
                 "allow": []
             },
             "edit": {
-	            
+	            "all": 0,
+	            "allow": [
+		            {Edit Permission Object(See details below)}
+	            ]
             }
         },
         "article": {
@@ -419,28 +422,53 @@ let permSum = {
 
 `permission.role.remove.default`, `permission.role.edit.default`: Same as above, but the action is remove/edit.
 
-`permission.role.edit.permissions.default`: 
+`permission.role.edit.all`: This is a special "all" property. When it equals 1, the role will be able to edit permission as it wishes with no limitation.
 
-`permission.role.edit.permissions.allow`: This is a special allow list. The objects stored in it are formatted as follows
+`permission.role.edit.allow`: This is a special allow list. It could be said that this is the most complex structure in the Blorum permission system. The objects stored in it are formatted as follows
+
 {
-	"lookup": [Permission Lookup Object],
-	"numeric_edit": {
-		"max": [Numeric Value],
-		"min": [Numeric Value]
-	}
+	"on": [List of Roles],
+	"allow": [
+		{
+			"lookup": [Permission Lookup Object],
+			"value": {
+				"any": 0,
+				"numeric": {
+					"max": [Numeric Value],
+					"min": [Numeric Value]
+				},
+				"enum": [List of  String],
+				"list": [List of value]
+			}
+		}
+	]
 }
 
-Permission Lookup Object is basically a sorted array, it indicates the keyname of a permission, for example, permission.role.edit are stored as
+The `on` attribute is a list of roles that this object is able to change.
+
+The `allow` contained a list of Objects that determined the roles' permission to edit permission, the structure of this object is explained as follows.
+
+
+The `lookup` attribute indicates the specific permission that could be changed.
+
+Permission Lookup Object is basically an ordered array, it indicates the keyname of permission, for example, permission.role.edit are stored as
 ["permission","role","edit"]
 
 Wildcard is supported, for example, if you want this role to be able to grant others any permissions under user.role category, the Permission Lookup Object might look like this:
 ["permission","user","role","\*"]
 
-If the value of a permission key should be numeric, the values inside `numeric_edit` could limit the max(increasing) and the min(decreasing) value that the role can set. This value will only exist if the permission is numeric.
+The `value` attribute indicated what could the value be edited to.
+If the value of a permission key should be numeric, the values inside `numeric` could limit the max(increasing) and the min(decreasing) value that the role can set. This value will only exist if the permission is numeric. The same for `enum`, and `list` (for a list, it is the value that the role could add/remove with)
 
-Permission Lookup Object can point to `permission.role.edit.permission.[something]`. Blorum will parse it correctly. This could be confusing, still. Since technically it could form a permission-granting chain. This makes sense for webmasters who want atomic permission control, but for most scenarios, you might want to just use one-depth and default=2 as permission allocation.
+`any` still works the same way - if declared `1`, any value could be assigned to the permission field(Of course, the range will still be checked).
 
-Permission Lookup Object can point to `allow_list`, this will grant the permission of giving a role to edit pointed allow_list
+Permission Lookup Object can point to `permission.role.edit.permission.[something]`. Blorum will parse it correctly. This could be confusing, still. Since technically it could form a permission-granting chain. This makes sense for webmasters who want atomic permission control, but for most scenarios, you might want to just use one-depth for permission allocation.
+
+Permission Lookup Object can points to `allow_list`, as `list` in `value` will be used as constraints.
+
+
+When roles are computed into the final sum, this field will be compiled, and eventually generate a Set, the Set will have permission's keyname as the key, and allowed values as the value. This is also the only field that is stored differently inside Blorum.
+
 
 `permission.article.read.default`
 
