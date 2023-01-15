@@ -1,3 +1,4 @@
+
 ---
 layout: default
 parent: English Documents
@@ -108,12 +109,12 @@ Take a possible limitation-permission of an untrusted user as another example
 
 ## Builtin Roles
 
-### Guest (pseudo)
+### guest (pseudo)
 A user with uid = 1 automatically has this role.
 
 This role is reserved for guests with no login status.
 
-### Omni (pseudo)
+### omni (pseudo)
 **It is not an actual role, and could not be removed with tweaks in the database.**
 
 The user with uid = 2 automatically has this role. This role cannot be granted to other users.
@@ -122,9 +123,14 @@ This permission allowed its user to bypass all verifications and rate limits, no
 
 Extension developers should also implement so.
 
-### Admin
+### admin
 
-### Moderator
+### moderator
+
+### forum_admin
+
+### writer
+
 
 ## Actual complete grantive role permission JSON structure
 
@@ -211,7 +217,10 @@ let permSum = {
                 "self": 0
             },
         },
-        "category": {
+        "category": { //Global categories
+	        "create": {
+		        "default": 0
+	        },
             "edit": {
 	            "all":0,
                 "allow": []
@@ -221,7 +230,10 @@ let permSum = {
                 "allow": []
             }
         },
-        "tag": {
+        "tag": { //Global tags
+	        "create": {
+		        "default": 0
+	        },
             "edit": {
 	            "all":0,
                 "allow": []
@@ -232,6 +244,9 @@ let permSum = {
             }
         },
         "forum": {
+	        "other": {
+		        "{{forum_id}}": {{Forum Permission Object}}
+	        },
             "default": {
                 "read": {
                     "category": {
@@ -394,52 +409,60 @@ let permSum = {
 };
 ```
 
-##### `with_rate_limit` 
+# Grantive role fields explained
+
+## Special fields
+
+#### with_rate_limit 
 If this role comes with a rate limit constraint.
 
-##### `*.all`
+#### \*.all
 For "all", value 1 = ignore allow list (Bypass, allow everything) , 0 = consider allow list.
 
-##### `permissions.flags`
+#### flags
 Store flags. See flags.md
 
-##### `permissions.max_session`
+#### max_session
 Maximum sessions(login status) a user could have.
 
-##### `permissions.cookie_expire_after`
+#### cookie_expire_after
 Time(seconds) for a session to expire.
 
-##### `permissions.user.permission.read.default`
+## User related permission fields
+
+#### user.permission.read.default
 The ability to read a user's permission(sum), see footnote[^1]
 
-##### `permissions.user.permission.read.all`
+#### user.permission.read.all
 Ignore allow list. Only consider read.default
 
-##### `permissions.user.permission.read.allow`
+#### user.permission.read.allow
 Specific users' permission that this role could read.
 
-##### `permissions.user.role.read.default`
+#### user.role.read.default
 See footnote[^3]
 
-##### `permissions.user.role.read.allow`
+#### user.role.read.allow
 Allow list for user reading the role of other users (Only the list of roles). The list itself is a list of roles, and users with roles defined in the list could be read (for their list of roles).
 
-##### `permissions.user.role.grant.allow.\*` or `permissions.user.role.remove.\*`
+#### user.role.grant.allow.\* or user.role.remove.\*
 Same as the definition in  `permissions.user.role.read`, those are the restrictions of what users could this user perform an action on, the specific roles that this user is allowed to grant/remove on others are defined in  `permission.role.read`.
 
-##### `permission.role.read.default`
+## Permission(administration) related permission fields
+
+#### role.read.default
 See footnote[^4]
 
-##### `permission.role.grant.default`
+#### role.grant.default
 0 = Disallow any role granting, 1 = allow role granting (Only the roles in the allow list). 2 = allow granting any roles (**Caution!** This means that users could grant any permission that they want as long as a role with such permission exists.)
 
-##### `permission.role.remove.default` or `permission.role.edit.default`
+#### role.remove.default or permission.role.edit.default
 Same as above, but the action is remove/edit.
 
-##### `permission.role.edit.all`
+#### role.edit.all
 This is a special "all" property. When it equals 1, the role will be able to edit permission as it wishes with no limitation.
 
-##### `permission.role.edit.allow`
+#### role.edit.allow
 This is a special allow list. It could be said that this is the most complex structure in the Blorum permission system. The objects stored in it are formatted as follows
 
 {
@@ -457,7 +480,6 @@ This is a special allow list. It could be said that this is the most complex str
 				"list": [List of value]
 			}
 		}
-	]
 }
 
 The `on` attribute is a list of roles that this object is able to change.
@@ -483,9 +505,53 @@ Permission Lookup Object can point to `permission.role.edit.permission.[somethin
 Permission Lookup Object can points to `allow_list`, as `list` in `value` will be used as constraints.
 
 
-When roles are computed into the final sum, this field will be compiled, and eventually generate a Set, the Set will have permission's keyname as the key, and allowed values as the value. This is also the only field that is stored differently inside Blorum.
+When roles are computed into the final sum, this field will be compiled, and eventually generate a Set, the Set will have permission's keyname as the key, and allowed values as the value. This is also one of the few fields that is stored differently inside Blorum.
 
-##### `permission.article.read.default`
+## Article related permission fields
+
+#### article.read.default
+
+#### article.read.category.allow
+
+#### article.read.tag.allow
+
+#### article.create.default
+
+#### article.create.category.allow
+
+#### article.read.category.allow
+
+#### article.edit.author
+
+#### article.edit.category
+
+#### article.edit.tag
+
+#### article.edit.self
+
+## Global category / tag related permission fields
+
+#### category.edit.allow
+
+#### category.remove.allow
+
+#### tag.edit.allow
+
+#### tag.remove.allow
+
+## Forum related permission fields
+### forum.other
+This field contained a set (in user defined structure, a JSON key-value storage) that use a forum's ID as the key and Forum Permission Object for the role's permission on that forum as the value.
+This will also be eventually compiled into a set inside Blorum.
+### forum.default
+This field also contained a Forum Permission Object, it is used as the fallback permission if the permission of a forum is undefined for the role.
+
+However, the fallback will not be able to limit on the categories and tags that is forum-exclusive, it could only cast such limitation on global (shared between all forums) categories and tags.
+
+### forum.default
+
+
+
 
 ---
 
